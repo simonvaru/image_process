@@ -95,16 +95,15 @@ def combine_images(image1, image2):
     return new_im
     
 if __name__ == '__main__':
-    lake = Image(filename='lake.png')
-    city = Image(filename='city.png')
+    picture = Image(filename='duck.png')
 
     # brightening
-    brightened_im = brighten(lake, 1.9)
-    brightened_im.write_image('brightened.png')
+    brightened_im = brighten(picture, 1.9)
+    brightened_im.write_image('picture_brightened.png')
 
     # darkening
-    darkened_im = brighten(lake, 0.3)
-    darkened_im.write_image('darkened.png')
+    darkened_im = brighten(picture, 0.3)
+    darkened_im.write_image('picture_darkened.png')
 
 """     # increase contrast
     incr_contrast = adjust_contrast(lake, 2, 0.5)

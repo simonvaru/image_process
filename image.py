@@ -12,7 +12,7 @@ Programmer Beast Mode Spotify playlist: https://open.spotify.com/playlist/4Akns5
 
 import numpy as np
 import png
-
+ 
 class Image:
     def __init__(self, x_pixels=0, y_pixels=0, num_channels=0, filename=''):
         # you need to input either filename OR x_pixels, y_pixels, and num_channels
@@ -36,7 +36,7 @@ class Image:
         '''
         im = png.Reader(self.input_path + filename).asFloat()
         resized_image = np.vstack(list(im[2]))
-        resized_image.resize(im[1], im[0], 3)
+        resized_image.resize((im[1], im[0], 3))
         resized_image = resized_image ** gamma
         return resized_image
 
@@ -45,15 +45,16 @@ class Image:
         3D numpy array (Y, X, channel) of values between 0 and 1 -> write to png
         '''
         im = np.clip(self.array, 0, 1)
-        y, x = self.array.shape[0], self.array.shape[1]
-        im = im.reshape(y, x*3)
+        y, x, _ = self.array.shape
+        im = im ** gamma
+        im = (255 * im).astype(np.uint8)
+
         writer = png.Writer(x, y)
         with open(self.output_path + output_file_name, 'wb') as f:
-            writer.write(f, 255*(im**(1/gamma)))
+            writer.write(f, im.reshape(-1, x * self.num_channels))
 
-        self.array.resize(y, x, 3)  # we mutated the method in the first step of the function
-        
+        self.array.resize(y, x, self.num_channels)
 
 if __name__ == '__main__':
-    im = Image(filename='lake.png')
+    im = Image(filename='duck.png')
     im.write_image('test.png')

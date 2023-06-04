@@ -20,13 +20,13 @@ def brighten(image, factor):
     new_im = Image(x_pixels=x_pixels, y_pixels=y_pixels, num_channels=num_channels)  # making a new array to copy values to!
 
     # # this is the non vectorized version
-    # for x in range(x_pixels):
-    #     for y in range(y_pixels):
-    #         for c in range(num_channels):
-    #             new_im.array[x, y, c] = image.array[x, y, c] * factor
+    for x in range(x_pixels):
+        for y in range(y_pixels):
+            for c in range(num_channels):
+                new_im.array[x, y, c] = image.array[x, y, c] * factor
 
     # faster version that leverages numpy
-    new_im.array = image.array * factor
+    # new_im.array = image.array * factor
 
     return new_im
 

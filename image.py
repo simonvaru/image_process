@@ -56,5 +56,8 @@ class Image:
         self.array.resize(y, x, self.num_channels)
 
 if __name__ == '__main__':
-    im = Image(filename='duck.png')
+    filename = input("Enter name of input file without '.png' extension, and with a 24 bits deep: ")
+    print("Archivo a editar es: ", filename, "\b.png")
+    inputFile = open(filename, "w")
+    im = Image(filename=filename+'.png')
     im.write_image('test.png')

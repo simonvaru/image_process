@@ -1,18 +1,39 @@
 from tkinter import *
+from tkinter import messagebox
 # <a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a>
 # <a href="https://www.flaticon.com/free-icons/calculator" title="calculator icons">Calculator icons created by Freepik - Flaticon</a>
 # <a href="https://www.flaticon.com/free-icons/id-card" title="id card icons">Id card icons created by Freepik - Flaticon</a>
 # <a href="https://www.flaticon.com/free-icons/glasses" title="glasses icons">Glasses icons created by Freepik - Flaticon</a>
 
 ####################################1st winndow using Menubuttom########################
-def file_menu_command():
+def open_command():
     print("File menu command executed.")
+    
+def save_command():
+    print("File menu command executed.")    
 
-def edit_menu_command():
+
+def prove_command():
     print("Edit menu command executed.")
 
-def help_menu_command():
-    print("Help menu command executed.")
+def brighten_command():
+    print("Edit menu command executed.")
+    
+def contrast_command():
+    print("Edit menu command executed.")
+
+def blur_command():
+    print("Edit menu command executed.")
+
+def kernel_command():
+    print("Edit menu command executed.")
+    
+def combine_command():
+    print("Edit menu command executed.")
+    
+        
+def about_info():
+    messagebox.showinfo("PNG Image Editor", "Author: Simon vargas Russo")    
 
 root = Tk()
 root.title("Menu Example")
@@ -38,25 +59,25 @@ menubar.config(menu=menu)
 #create file menu
 file_menu = Menu(menu, tearoff=False)
 menu.add_cascade(label="File", menu=file_menu)
-file_menu.add_command(label="Open", command=file_menu_command)
-file_menu.add_command(label="Save", command=file_menu_command)
+file_menu.add_command(label="Open", command=open_command)
+file_menu.add_command(label="Save", command=save_command)
 file_menu.add_separator()
 file_menu.add_command(label="Exit", command=root.quit)
 
 #create edit menu
 edit_menu = Menu(menu, tearoff=False)
 menu.add_cascade(label="Edit", menu=edit_menu)
-edit_menu.add_command(label="Prove .png editing", command=edit_menu_command)
-edit_menu.add_command(label="Brighten", command=edit_menu_command)
-edit_menu.add_command(label="Adjust contrast", command=edit_menu_command)
-edit_menu.add_command(label="Blur", command=edit_menu_command)
-edit_menu.add_command(label="Apply kernel", command=edit_menu_command)
-edit_menu.add_command(label="Combine images", command=edit_menu_command)
+edit_menu.add_command(label="Prove .png editing", command=prove_command)
+edit_menu.add_command(label="Brighten", command=brighten_command)
+edit_menu.add_command(label="Adjust contrast", command=contrast_command)
+edit_menu.add_command(label="Blur", command=blur_command)
+edit_menu.add_command(label="Apply kernel", command=kernel_command)
+edit_menu.add_command(label="Combine images", command=combine_command)
 
 #create help menu
 help_menu = Menu(menu, tearoff=False)
 menu.add_cascade(label="Help", menu=help_menu)
-help_menu.add_command(label="About", command=help_menu_command)
+help_menu.add_command(label="About", command=about_info)
 
 
 

@@ -1,6 +1,10 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
+##
+import numpy as np
+import png
+from PIL import Image, ImageTk
 # from image import *
 # from image import Image
 # from image import write_image
@@ -10,31 +14,91 @@ from tkinter import filedialog
 # <a href="https://www.flaticon.com/free-icons/glasses" title="glasses icons">Glasses icons created by Freepik - Flaticon</a>
 
 ####################################1st winndow using Menubuttom########################
+def write_image(self, output_file_name, gamma=2.2):
+    '''
+    3D numpy array (Y, X, channel) of values between 0 and 1 -> write to png
+    '''
+    im = np.clip(self.array, 0, 1)
+    y, x, _ = self.array.shape
+    im = im ** gamma
+    im = (255 * im).astype(np.uint8)
+
+    writer = png.Writer(x, y)
+    with open(self.output_path + output_file_name, 'wb') as f:
+        writer.write(f, im.reshape(-1, x * self.num_channels))
+
+    self.array.resize(y, x, self.num_channels)
+
+def read_image(self, filename, gamma=2.2):
+    '''
+    read PNG RGB image, return 3D numpy array organized along Y, X, channel
+    values are float, gamma is decoded
+    '''
+    im = png.Reader(self.input_path + filename).asFloat()
+    resized_image = np.vstack(list(im[2]))
+    resized_image.resize((im[1], im[0], 3))
+    resized_image = resized_image ** gamma
+    return resized_image
+
+def write_image(self, output_file_name, gamma=2.2):
+    '''
+    3D numpy array (Y, X, channel) of values between 0 and 1 -> write to png
+    '''
+    im = np.clip(self.array, 0, 1)
+    y, x, _ = self.array.shape
+    im = im ** gamma
+    im = (255 * im).astype(np.uint8)
+
+    writer = png.Writer(x, y)
+    with open(self.output_path + output_file_name, 'wb') as f:
+        writer.write(f, im.reshape(-1, x * self.num_channels))
+
+    self.array.resize(y, x, self.num_channels)
+
+
+##
+
 def open_command():
 
     ftypes = [('PNG files', '*.png'), ('All files', '*')]
     dlg = filedialog.Open(initialdir="input", title="Choose image to edit", filetypes = ftypes)
     fl = dlg.show()
-    #create a text widget
-    txt = Text()
-    txt.pack(fill=BOTH, expand=1)
+    ##create a text widget
+    # txt = Text()
+    # txt.pack(fill=BOTH, expand=1)
+    ##create a png widget
+    im = ImageTk.PhotoImage(dlg)
     
-    if fl != '':
-        text = readFile(fl)
-        txt.insert(END, text)
+    label = Label(myFrame, image=im)
+    label.pack()
+    label.write_image('test.png')
+    
+    
+    
+    
+    #if fl != '':
+        ##readfile for a text file
+        # text = readFile(fl)
+        # txt.insert(END, text)
+        ##
+        ##readfile for a png file
+        
+        
+        ##
+        
     print("File menu command executed.")
-    ##prueba_in
-    # im=Image()
-    # im==fl
-    # im.image.write_image('test.png')
-    ##prueba_fin
-
-def readFile(filename):
+    
+def readFile(filename):##readFile for a text file
 
     f = open(filename, "r")
     text = f.read()
-    return text
+    return text        ##
 
+##readfile for a png file
+
+
+
+##
     
 def save_command():
     print("File menu command executed.")    

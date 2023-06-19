@@ -5,9 +5,7 @@ from tkinter import filedialog
 import numpy as np
 import png
 from PIL import Image, ImageTk
-# from image import *
-# from image import Image
-# from image import write_image
+
 # <a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a>
 # <a href="https://www.flaticon.com/free-icons/calculator" title="calculator icons">Calculator icons created by Freepik - Flaticon</a>
 # <a href="https://www.flaticon.com/free-icons/id-card" title="id card icons">Id card icons created by Freepik - Flaticon</a>
@@ -58,47 +56,28 @@ def write_image(self, output_file_name, gamma=2.2):
 
 ##
 
-def open_command():
+def open_command():#### EXITO!!!!!!
 
     ftypes = [('PNG files', '*.png'), ('All files', '*')]
     dlg = filedialog.Open(initialdir="input", title="Choose image to edit", filetypes = ftypes)
-    fl = dlg.show()
-    ##create a text widget
-    # txt = Text()
-    # txt.pack(fill=BOTH, expand=1)
-    ##create a png widget
-    im = ImageTk.PhotoImage(dlg)
-    
-    label = Label(myFrame, image=im)
-    label.pack()
-    label.write_image('test.png')
-    
-    
-    
-    
-    #if fl != '':
-        ##readfile for a text file
-        # text = readFile(fl)
-        # txt.insert(END, text)
-        ##
-        ##readfile for a png file
+    file_path = dlg.show()
+
+    if file_path:
+        # Open the image using PIL
+        image = Image.open(file_path)
+
+        # Convert the image to PhotoImage format for Tkinter
+        im = ImageTk.PhotoImage(image)
+        # Create a label to display the image
+        label = Label(root, image=im)
+        label.pack()
+
+        # Save the image to a file
+        output_path = 'output/'
+        image.save(output_path+'test.png')
         
-        
-        ##
-        
-    print("File menu command executed.")
+  
     
-def readFile(filename):##readFile for a text file
-
-    f = open(filename, "r")
-    text = f.read()
-    return text        ##
-
-##readfile for a png file
-
-
-
-##
     
 def save_command():
     print("File menu command executed.")    
@@ -169,6 +148,29 @@ edit_menu.add_command(label="Combine images", command=combine_command)
 help_menu = Menu(menu, tearoff=False)
 menu.add_cascade(label="Help", menu=help_menu)
 help_menu.add_command(label="About", command=about_info)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

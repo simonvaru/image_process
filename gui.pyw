@@ -1,5 +1,9 @@
 from tkinter import *
 from tkinter import messagebox
+from tkinter import filedialog
+# from image import *
+# from image import Image
+# from image import write_image
 # <a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a>
 # <a href="https://www.flaticon.com/free-icons/calculator" title="calculator icons">Calculator icons created by Freepik - Flaticon</a>
 # <a href="https://www.flaticon.com/free-icons/id-card" title="id card icons">Id card icons created by Freepik - Flaticon</a>
@@ -7,7 +11,30 @@ from tkinter import messagebox
 
 ####################################1st winndow using Menubuttom########################
 def open_command():
+
+    ftypes = [('PNG files', '*.png'), ('All files', '*')]
+    dlg = filedialog.Open(initialdir="input", title="Choose image to edit", filetypes = ftypes)
+    fl = dlg.show()
+    #create a text widget
+    txt = Text()
+    txt.pack(fill=BOTH, expand=1)
+    
+    if fl != '':
+        text = readFile(fl)
+        txt.insert(END, text)
     print("File menu command executed.")
+    ##prueba_in
+    # im=Image()
+    # im==fl
+    # im.image.write_image('test.png')
+    ##prueba_fin
+
+def readFile(filename):
+
+    f = open(filename, "r")
+    text = f.read()
+    return text
+
     
 def save_command():
     print("File menu command executed.")    
@@ -59,7 +86,7 @@ menubar.config(menu=menu)
 #create file menu
 file_menu = Menu(menu, tearoff=False)
 menu.add_cascade(label="File", menu=file_menu)
-file_menu.add_command(label="Open", command=open_command)
+file_menu.add_command(label="Open File  ", command=open_command)
 file_menu.add_command(label="Save", command=save_command)
 file_menu.add_separator()
 file_menu.add_command(label="Exit", command=root.quit)

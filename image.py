@@ -1,5 +1,5 @@
 """
-Python Image Representation (modified from MIT 6.865)
+BASE ON: Python Image Representation (modified from MIT 6.865)
 
 YouTube Kylie Ying: https://www.youtube.com/ycubed 
 Twitch KylieYing: https://www.twitch.tv/kylieying 

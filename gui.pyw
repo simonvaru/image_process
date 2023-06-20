@@ -5,83 +5,23 @@ from tkinter import filedialog
 import numpy as np
 import png
 from PIL import Image, ImageTk
-
+##
+import my_image_f
+import gui_root
+from gui_root import root
 # <a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a>
 # <a href="https://www.flaticon.com/free-icons/calculator" title="calculator icons">Calculator icons created by Freepik - Flaticon</a>
 # <a href="https://www.flaticon.com/free-icons/id-card" title="id card icons">Id card icons created by Freepik - Flaticon</a>
 # <a href="https://www.flaticon.com/free-icons/glasses" title="glasses icons">Glasses icons created by Freepik - Flaticon</a>
 
-####################################1st winndow using Menubuttom########################
-def write_image(self, output_file_name, gamma=2.2):
-    '''
-    3D numpy array (Y, X, channel) of values between 0 and 1 -> write to png
-    '''
-    im = np.clip(self.array, 0, 1)
-    y, x, _ = self.array.shape
-    im = im ** gamma
-    im = (255 * im).astype(np.uint8)
-
-    writer = png.Writer(x, y)
-    with open(self.output_path + output_file_name, 'wb') as f:
-        writer.write(f, im.reshape(-1, x * self.num_channels))
-
-    self.array.resize(y, x, self.num_channels)
-
-def read_image(self, filename, gamma=2.2):
-    '''
-    read PNG RGB image, return 3D numpy array organized along Y, X, channel
-    values are float, gamma is decoded
-    '''
-    im = png.Reader(self.input_path + filename).asFloat()
-    resized_image = np.vstack(list(im[2]))
-    resized_image.resize((im[1], im[0], 3))
-    resized_image = resized_image ** gamma
-    return resized_image
-
-def write_image(self, output_file_name, gamma=2.2):
-    '''
-    3D numpy array (Y, X, channel) of values between 0 and 1 -> write to png
-    '''
-    im = np.clip(self.array, 0, 1)
-    y, x, _ = self.array.shape
-    im = im ** gamma
-    im = (255 * im).astype(np.uint8)
-
-    writer = png.Writer(x, y)
-    with open(self.output_path + output_file_name, 'wb') as f:
-        writer.write(f, im.reshape(-1, x * self.num_channels))
-
-    self.array.resize(y, x, self.num_channels)
 
 
-##
-
-def open_command():#### EXITO!!!!!!
-
-    ftypes = [('PNG files', '*.png'), ('All files', '*')]
-    dlg = filedialog.Open(initialdir="input", title="Choose image to edit", filetypes = ftypes)
-    file_path = dlg.show()
-
-    if file_path:
-        # Open the image using PIL
-        image = Image.open(file_path)
-
-        # Convert the image to PhotoImage format for Tkinter
-        im = ImageTk.PhotoImage(image)
-        # Create a label to display the image
-        label = Label(root, image=im)
-        label.pack()
-
-        # Save the image to a file
-        output_path = 'output/'
-        image.save(output_path+'test.png')
         
-  
+my_image=my_image_f.myImage()  
     
     
 def save_command():
     print("File menu command executed.")    
-
 
 def prove_command():
     print("Edit menu command executed.")
@@ -100,16 +40,12 @@ def kernel_command():
     
 def combine_command():
     print("Edit menu command executed.")
-    
-        
+         
 def about_info():
-    messagebox.showinfo("PNG Image Editor", "Author: Simon vargas Russo")    
+    messagebox.showinfo("PNG Image Editor", "Author: Simon Vargas Russo")    
 
-root = Tk()
-root.title("Menu Example")
-root.config(bg="blue")
 
-#create root
+####################################1st winndow using Menubuttom########################
 myFrame = Frame(root)
 myFrame.pack()
 
@@ -129,7 +65,7 @@ menubar.config(menu=menu)
 #create file menu
 file_menu = Menu(menu, tearoff=False)
 menu.add_cascade(label="File", menu=file_menu)
-file_menu.add_command(label="Open File  ", command=open_command)
+file_menu.add_command(label="Open File  ", command=my_image_f.open_command)
 file_menu.add_command(label="Save", command=save_command)
 file_menu.add_separator()
 file_menu.add_command(label="Exit", command=root.quit)

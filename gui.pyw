@@ -65,7 +65,7 @@ menubar.config(menu=menu)
 #create file menu
 file_menu = Menu(menu, tearoff=False)
 menu.add_cascade(label="File", menu=file_menu)
-file_menu.add_command(label="Open File  ", command=my_image_f.open_command)
+file_menu.add_command(label="Open File", command=lambda: my_image.open_command(root))
 file_menu.add_command(label="Save", command=save_command)
 file_menu.add_separator()
 file_menu.add_command(label="Exit", command=root.quit)

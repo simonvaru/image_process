@@ -20,6 +20,7 @@ class myImage:
     def __init__(self, x_pixels=0, y_pixels=0, num_channels=0, filename=''):
         # initialization and set of the array attribute
         self.array = np.zeros((y_pixels, x_pixels, num_channels))
+        self.num_channels = num_channels
 
     def write_image(self, output_file_name, gamma=2.2):
         '''
@@ -48,7 +49,7 @@ class myImage:
         resized_image = resized_image ** gamma
         return resized_image
 
-    def open_command(self):
+    def open_command(self, root):
         ftypes = [('PNG files', '*.png'), ('All files', '*')]
         dlg = filedialog.Open(initialdir="input", title="Choose image to edit", filetypes=ftypes)
         file_path = dlg.show()
@@ -60,7 +61,7 @@ class myImage:
             # Convert the image to PhotoImage format for Tkinter
             im = ImageTk.PhotoImage(image)
             # Create a label to display the image
-            label = Label(gui_root.root, image=im)
+            label = Label(root, image=im)
             label.pack()
 
             # Save the image to a file
